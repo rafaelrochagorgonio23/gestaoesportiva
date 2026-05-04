@@ -1,9 +1,7 @@
 import os
 from supabase import create_client, Client
-from dotenv import load_dotenv
 import streamlit as st
 
-load_dotenv()
 
 def get_supabase() -> Client:
     url = os.getenv("SUPABASE_URL") or st.secrets.get("SUPABASE_URL", "")
