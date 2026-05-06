@@ -68,11 +68,7 @@ with tab2:
                     "grupo_id": gid,
                     "ativo": True
                 }).execute()
-                try:
-    response = supabase.table("membros").select("*").execute()
-except Exception as e:
-    st.error(f"Erro detalhado: {e}")  # mostra o erro real
-
+                
                 
                 st.success(f"Membro **{nome}** cadastrado!")
                 st.rerun()
