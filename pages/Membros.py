@@ -59,11 +59,11 @@ with tab2:
             meses = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho",
              "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"]
 
-            with col_d:
+        with col_d:
                 dia = st.selectbox("Dia", range(1, 32), index=None, placeholder="Dia")
-            with col_m:
+        with col_m:
                 mes_nome = st.selectbox("Mês", meses, index=None, placeholder="Mês")
-            with col_a:
+        with col_a:
                 ano = st.selectbox("Ano", range(1900, 2026), index=None, placeholder="Ano")
 
 # Converter para date
