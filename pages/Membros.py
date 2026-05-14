@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from database import get_supabase
 from auth import require_auth
-from datetime import date
+
 
 
 st.set_page_config(page_title="Membros", page_icon="🙋", layout="wide")
@@ -52,7 +52,31 @@ with tab2:
         col1, col2 = st.columns(2)
         with col1:
             # nasc = st.date_input("Data de nascimento", value=None)
-            nasc = st.date_input("Data de nascimento", value=None, min_value=date(1900, 1, 1))
+            # nasc = st.date_input("Data de nascimento", value=None, min_value=date(1900, 1, 1))
+            st.write("Data de nascimento")
+            col_d, col_m, col_a = st.columns(3)
+
+            meses = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho",
+             "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"]
+
+            with col_d:
+                dia = st.selectbox("Dia", range(1, 32), index=None, placeholder="Dia")
+            with col_m:
+                mes_nome = st.selectbox("Mês", meses, index=None, placeholder="Mês")
+            with col_a:
+                ano = st.selectbox("Ano", range(1900, 2026), index=None, placeholder="Ano")
+
+# Converter para date
+from datetime import date
+nasc = None
+if dia and mes_nome and ano:
+    mes_num = meses.index(mes_nome) + 1
+    try:
+        nasc = date(ano, mes_num, dia)
+    except ValueError:
+        st.error("Data inválida.")
+            
+            
         with col2:
             contato = st.text_input("Contato (WhatsApp)", placeholder="(11) 99999-9999")
         responsavel = st.text_input("Responsável (se menor de idade)", placeholder="Nome do responsável")
