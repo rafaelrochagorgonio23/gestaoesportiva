@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 from database import get_supabase
 from auth import require_auth
+from datetime import date
+
 
 st.set_page_config(page_title="Membros", page_icon="🙋", layout="wide")
 
@@ -49,7 +51,8 @@ with tab2:
         nome = st.text_input("Nome completo *", placeholder="Ex: João da Silva")
         col1, col2 = st.columns(2)
         with col1:
-            nasc = st.date_input("Data de nascimento", value=None)
+            # nasc = st.date_input("Data de nascimento", value=None)
+            nasc = st.date_input("Data de nascimento", value=None, min_value=date(1900, 1, 1))
         with col2:
             contato = st.text_input("Contato (WhatsApp)", placeholder="(11) 99999-9999")
         responsavel = st.text_input("Responsável (se menor de idade)", placeholder="Nome do responsável")
