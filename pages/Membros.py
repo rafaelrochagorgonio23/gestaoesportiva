@@ -45,37 +45,33 @@ with tab1:
     else:
         st.info("Nenhum membro encontrado.")
 
-# ── TAB 2: CADASTRAR ───────────────────────────────────────
 with tab2:
     st.subheader("Novo Membro")
     with st.form("form_novo_membro"):
         nome = st.text_input("Nome completo *", placeholder="Ex: João da Silva")
-        col1, col2 = st.columns(2)
-        with col1:
-            # nasc = st.date_input("Data de nascimento", value=None)
-            # nasc = st.date_input("Data de nascimento", value=None, min_value=date(1900, 1, 1))
+        col1, col2 = st.columns(2)        # ← indentado dentro do form
+        
+        with col1:                         # ← indentado dentro do form
             st.write("Data de nascimento")
             col_d, col_m, col_a = st.columns(3)
-
+            
             meses = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho",
-             "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"]
-
-        with col_d:
+                     "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"]
+            
+            with col_d:                    # ← indentado dentro do col1
                 dia = st.selectbox("Dia", range(1, 32), index=None, placeholder="Dia")
-        with col_m:
+            with col_m:
                 mes_nome = st.selectbox("Mês", meses, index=None, placeholder="Mês")
-        with col_a:
+            with col_a:
                 ano = st.selectbox("Ano", range(1900, 2026), index=None, placeholder="Ano")
 
-# Converter para date
-
-nasc = None
-if dia and mes_nome and ano:
-    mes_num = meses.index(mes_nome) + 1
-    try:
-        nasc = date(ano, mes_num, dia)
-    except ValueError:
-        st.error("Data inválida.")
+            nasc = None
+            if dia and mes_nome and ano:
+                mes_num = meses.index(mes_nome) + 1
+                try:
+                    nasc = date(ano, mes_num, dia)
+                except ValueError:
+                    st.error("Data inválida.")
             
             
         with col2:
