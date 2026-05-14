@@ -1,3 +1,6 @@
+import locale
+locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
+
 import streamlit as st
 import pandas as pd
 from database import get_supabase
