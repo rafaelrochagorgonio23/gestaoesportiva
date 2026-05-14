@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from database import get_supabase
 from auth import require_auth
+from datetime import date
 
 
 
@@ -67,7 +68,7 @@ with tab2:
                 ano = st.selectbox("Ano", range(1900, 2026), index=None, placeholder="Ano")
 
 # Converter para date
-from datetime import date
+
 nasc = None
 if dia and mes_nome and ano:
     mes_num = meses.index(mes_nome) + 1
