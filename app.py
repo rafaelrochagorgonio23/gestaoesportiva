@@ -23,7 +23,7 @@ Utilize o **menu lateral** para navegar entre os módulos:
 
 | Módulo | Descrição |
 |--------|-----------|
-| 👥 **Grupos** | Cadastro e gestão de turmas/patotas |
+| 👥 **Grupos** | Cadastro e gestão de turmas |
 | 🙋 **Membros** | Cadastro de participantes e jovens |
 | 📋 **Presenças** | Controle de frequência nas atividades |
 | 🎽 **Recursos** | Gestão de uniformes e materiais esportivos |
