@@ -36,7 +36,7 @@ def date_selectors(label, key_prefix, default: date = None):
                            key=f"{key_prefix}_mes")
     with c3:
         ano_atual = default.year
-        anos = list(range(ano_atual - 5, ano_atual + 11))
+        anos = list(range(ano_atual - 126, ano_atual + 11))
         ano = st.selectbox("Ano", anos,
                            index=anos.index(ano_atual) if ano_atual in anos else 0,
                            key=f"{key_prefix}_ano")
