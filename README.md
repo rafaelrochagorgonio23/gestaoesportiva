@@ -9,9 +9,9 @@ que ONGs e projetos sociais que utilizam o futebol como ferramenta de inclusão 
 
 | Módulos:
 
-| Grupos 
-| Membros 
-| Presenças 
-| Recursos 
-| Eventos|
+| Gerenciamento de grupos 
+| Gerenciamento de membros 
+| Lista de presença
+| Gerenciamento de recursos 
+| Gerenciamento de eventos esportivos|
 
