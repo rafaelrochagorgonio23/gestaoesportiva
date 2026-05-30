@@ -8,7 +8,7 @@ que ONGs e projetos sociais que utilizam o futebol como ferramenta de inclusão 
 ## ✅ Funcionalidades 
 
 | Módulos:
-|--------|--------|------|--------|--------|
+
 | Grupos 
 | Membros 
 | Presenças 
