@@ -2,6 +2,34 @@ import streamlit as st
 from database import get_supabase
 
 
+# ─────────────────────────────────────────────
+# CONVITE DE USUÁRIO
+# ─────────────────────────────────────────────
+
+def convidar_usuario(email: str) -> tuple[bool, str]:
+    """
+    Admin envia convite por e-mail.
+    O usuário recebe um link para definir a própria senha.
+    Requer service_role key no Supabase (Admin API).
+    """
+    sb = get_supabase()
+    try:
+        sb.auth.admin.invite_user_by_email(email)
+        return True, f"Convite enviado para {email} com sucesso!"
+    except Exception as e:
+        msg = str(e)
+        if "already registered" in msg or "already been registered" in msg:
+            return False, "Este e-mail já está cadastrado no sistema."
+        elif "invalid" in msg.lower():
+            return False, "E-mail inválido."
+        else:
+            return False, f"Erro ao enviar convite: {msg}"
+
+
+# ─────────────────────────────────────────────
+# LOGIN
+# ─────────────────────────────────────────────
+
 def login_page():
     """Renderiza a tela de login."""
     st.set_page_config(page_title="Login", page_icon="⚽", layout="centered")
@@ -38,7 +66,42 @@ def login_page():
                     st.error(f"Erro ao autenticar: {msg}")
 
         st.markdown("---")
-        st.caption("Não tem conta? Peça ao administrador para criar seu acesso.")
+
+        # ── Painel de convite (protegido por senha admin) ─────────────────
+        with st.expander("👤 Convidar novo usuário"):
+            SENHA_ADMIN = st.secrets.get("ADMIN_PASSWORD", "admin123")
+
+            senha_admin = st.text_input(
+                "🔑 Senha do administrador",
+                type="password",
+                key="senha_admin_convite",
+                placeholder="Digite a senha de admin"
+            )
+
+            if senha_admin and senha_admin != SENHA_ADMIN:
+                st.error("Senha incorreta.")
+
+            elif senha_admin == SENHA_ADMIN:
+                with st.form("form_convite"):
+                    email_novo = st.text_input(
+                        "📧 E-mail do novo usuário",
+                        placeholder="novo@email.com"
+                    )
+                    enviar = st.form_submit_button(
+                        "📨 Enviar convite",
+                        type="primary",
+                        use_container_width=True
+                    )
+
+                if enviar:
+                    if not email_novo.strip():
+                        st.error("Informe o e-mail.")
+                    else:
+                        ok, msg = convidar_usuario(email_novo.strip())
+                        if ok:
+                            st.success(msg)
+                        else:
+                            st.error(msg)
 
 
 def logout():
