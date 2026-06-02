@@ -1,5 +1,5 @@
 import streamlit as st
-from database import get_supabase
+from database import get_supabase, get_supabase_admin
 
 
 # ─────────────────────────────────────────────
@@ -12,7 +12,7 @@ def convidar_usuario(email: str) -> tuple[bool, str]:
     O usuário recebe um link para definir a própria senha.
     Requer service_role key no Supabase (Admin API).
     """
-    sb = get_supabase()
+    sb = get_supabase_admin()
     try:
         sb.auth.admin.invite_user_by_email(email)
         return True, f"Convite enviado para {email} com sucesso!"
